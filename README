@@ -1,0 +1,53 @@
+Features :
+- Basic Requirements :
+	- Drawing straight lines (done)
+	- Drawing rectangles (done)
+	- Drawing ellipses (done)
+	- Drawing 5-pointed stars (done)
+	- Undo/redo (done/done)
+	- Different colours (done)
+	- Additional : Clear Canvas (done)
+- Advanced Requirements :
+	- Support drawing squares and circles, using control key (key code = 17) to lock ratio (done)
+	- Add more shapes : 
+		- triangles (done), 
+		- parllelogram (done), 
+		- hexagon (done)
+	- Load and save (done)
+
+Implementation : 
+- MVC pattern : 
+	- Model folder : drawing/model/ 
+	- View folder : drawing/view/
+	- Controller folder : drawing/controller/
+	- Main Class : drawing/main/
+
+- Image dimension :
+	- mouse click : draw the image in default size (I set it about 50-100 pixel) 
+	- mouse drag : size is defined by start and end position of the mouse events (press and released)
+	- Be aware that on "mouse drag (key pressed and released)" when you released the mouse, then it will immediately draw the image even if it is only one pixel. I was confused at first because I thought my application did not draw anything
+- Polimorphic  manner :
+		- In the Drawing View : I instantiate the the control buttons as MyButton
+		- All the Graphics2D object stored as Shape
+- Undo and Redo : 
+		- Implemented using 2 Stacks. The first stack to store the current images and the second for the undo-ed images
+		- On undo event : the last image from the first stack would be thrown to the second stack
+		- On redo event : the last image from the second stack would be added to the first stack
+		- Everytime user draw a new image, then the second stack would be cleared (this approach works like web browser history mechanism)
+- Load and Save :
+	- User can choose the file location using file selector dialog
+
+How to run the application : 
+- Go to "src" folder
+- Compile all java class from all folders (drawing/controller, drawing/main, drawing/model, drawing/view)
+- run DrawingMain class in main folder
+
+
+How to run the Unit tests :
+- Go to the "CS5001-p4-vector-drawing" folder
+- Compiling : javac -cp ./src/junit.jar:./src/hamcrest.jar:./src/:. src/drawing/model/tests/*.java
+- Run Test : 
+	- DrawingModeuleTest : java -cp ./src/junit.jar:./src/hamcrest.jar:./src/:. org.junit.runner.JUnitCore drawing.model.tests.DrawingModelTest
+	- MyShapeTest : java -cp ./src/junit.jar:./src/hamcrest.jar:./src/:. org.junit.runner.JUnitCore drawing.model.tests.MyShapeTest
+
+
